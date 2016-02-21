@@ -43,4 +43,4 @@ var_dump($account1 === $account2) //true
 
 ### License
 
-The JetFire Db is released under the MIT public license : http://www.opensource.org/licenses/MIT. 
+The JetFire Di is released under the MIT public license : http://www.opensource.org/licenses/MIT. 
