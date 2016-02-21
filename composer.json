@@ -1,0 +1,24 @@
+{
+    "name": "jetfirephp/di",
+    "type": "library",
+    "description": "JetFire - Dependency Injection Container",
+    "keywords": ["Dependency Injection", "Container","DI"],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Sumugan Sinnarasa",
+            "email": "mugan27@gmail.com",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "php": ">=5.4.0"
+    },
+    "autoload": {
+        "psr-4":{
+            "JetFire\\Di\\": "src/"
+
+        }
+    },
+    "minimum-stability": "dev"
+}
