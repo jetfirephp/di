@@ -18,26 +18,26 @@ require __DIR__ . '/vendor/autoload.php';
 
 $rules = [
     'account' => [
-        'use' => '\\Account\\Class',
+        'use' => 'Account',
         'rule' => [
             'shared' => true,
         ]
     ],
     'amount' => [
-        'use' => '\\Amount\\Class',
-        'rule' => [
-            'shared' => true,
-            'constructParams' => ['20']
-        ]
+        'use' => 'Amount',
     ],
 ];
 
 $di = new Di();
 $di->registerCollection($rules);
 
-$account1 = $di->get('account'); // instance of \\Account\\Class
+$account1 = $di->get('account'); // instance of Account
 $account2 = $di->get('account');
 var_dump($account1 === $account2) //true
+
+$amount1 = $di->get('amount');
+$amount2 = $di->get('amount');
+var_dump($amount1 === $amount2) //false
  
 ```
 
