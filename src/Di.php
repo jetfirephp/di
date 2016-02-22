@@ -34,12 +34,44 @@ class Di {
 
     /**
      * @param array $rules
+     * @param array $params
      */
-    public function registerCollection(array $rules){
+    public function registerCollection(array $rules,array $params = []){
         $this->alias = $rules;
         foreach($rules as $alias => $rule){
+            if(isset($rule['rule']['construct']) && is_array($rule['rule']['construct']))
+                foreach($rule['rule']['construct'] as $key1 => $value1)
+                    if (!is_null($result1 = $this->checkValue($key1,$value1, $params)))
+                        $rule['rule']['construct'][$key1] = $result1;
+            if(isset($rule['rule']['call']))
+                foreach($rule['rule']['call'] as $method => $functions)
+                    foreach($functions[1] as $key2 => $value2)
+                    if (!is_null($result2 = $this->checkValue($key2,$value2, $params)))
+                            $rule['rule']['call'][$method][1][$key2] = $result2;
             $this->register($rule['use'],$rule['rule']);
         }
+    }
+
+    /**
+     * @param $key
+     * @param $value
+     * @param array $params
+     * @return null
+     */
+    private function checkValue($key,$value,array $params = []){
+        if(is_numeric($key) && substr($value,0,1) === "#") {
+            $parsed = explode('.', $value);
+            $result = null;
+            while ($parsed) {
+                $next = array_shift($parsed);
+                if (!is_null($params[$next]))
+                    $result = $params[$next];
+                else
+                    return null;
+            }
+            return $result;
+        }
+        return null;
     }
 
     /**
@@ -130,7 +162,7 @@ class Di {
         }
         return function (array $args, array $share = []) use ($paramInfo, $rule) {
             if (isset($rule['shareInstances'])) $share = array_merge($share, array_map([$this, 'create'], $rule['shareInstances']));
-            if ($share || isset($rule['constructParams'])) $args = array_merge($args, isset($rule['constructParams']) ? $this->expand($rule['constructParams'], $share) : [], $share);
+            if ($share || isset($rule['construct'])) $args = array_merge($args, isset($rule['construct']) ? $this->expand($rule['construct'], $share) : [], $share);
             $parameters = [];
 
             foreach ($paramInfo as $p) {
