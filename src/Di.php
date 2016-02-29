@@ -76,6 +76,14 @@ class Di {
     }
 
     /**
+     * @param $alias
+     * @param $class
+     */
+    public function addAlias($alias,$class){
+        $this->alias[$alias]['use'] = $class;
+    }
+
+    /**
      * @param $name
      * @return array
      */
