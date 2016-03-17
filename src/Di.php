@@ -57,6 +57,19 @@ class Di {
 
     /**
      * @param $key
+     * @param $class
+     */
+    public function register($key,$class = null){
+        if(is_null($class)){
+            $class = $key;
+            $key = get_class($class);
+        }
+        if(!isset($this->instances[$key]))
+            $this->instances[$key] = $class;
+    }
+
+    /**
+     * @param $key
      * @param $value
      * @param array $params
      * @return null
