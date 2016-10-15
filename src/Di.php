@@ -33,6 +33,13 @@ class Di {
     }
 
     /**
+     * @param $name
+     */
+    public function removeRule($name) {
+        unset($this->rules[ltrim(strtolower($name), '\\')]);
+    }
+
+    /**
      * @param array $rules
      * @param array $params
      */
