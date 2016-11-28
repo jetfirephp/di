@@ -34,6 +34,15 @@ class Di {
 
     /**
      * @param $name
+     * @param $instance
+     * @internal param array $rule
+     */
+    public function addInstance($name, $instance) {
+        $this->instances[$name] = $instance;
+    }
+
+    /**
+     * @param $name
      */
     public function removeRule($name) {
         unset($this->rules[ltrim(strtolower($name), '\\')]);
