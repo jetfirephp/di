@@ -22,7 +22,7 @@ class Di {
     /**
      * @var array
      */
-    private $instances = [];
+    protected $instances = [];
 
     /**
      * @param $name
