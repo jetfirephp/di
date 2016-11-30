@@ -22,7 +22,7 @@ class Di {
     /**
      * @var array
      */
-    protected $instances = [];
+    private $instances = [];
 
     /**
      * @param $name
@@ -30,15 +30,6 @@ class Di {
      */
     public function addRule($name, array $rule) {
         $this->rules[ltrim(strtolower($name), '\\')] = array_merge($this->getRule($name), $rule);
-    }
-
-    /**
-     * @param $name
-     * @param $instance
-     * @internal param array $rule
-     */
-    public function addInstance($name, $instance) {
-        $this->instances[$name] = $instance;
     }
 
     /**
