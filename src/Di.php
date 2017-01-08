@@ -119,6 +119,17 @@ class Di {
 
     /**
      * @param $name
+     * @return bool
+     */
+    public function has($name){
+        if (isset($this->alias[$name])) return true;
+        if (!empty($this->instances[$name])) return true;
+        if (!empty($this->cache[$name])) return true;
+        return false;
+    }
+
+    /**
+     * @param $name
      * @param array $args
      * @param array $share
      * @return mixed
